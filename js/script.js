@@ -5,6 +5,7 @@ let _App = {
   seed: 176,
   init: function(){
     utils.initSeed(this.seed);
+
     // console.log(`Hello ${name}, how are you ${time}?`);
     // this.PRNG.initSeed(this.seed);
     this.canvas = document.getElementById('c');
@@ -32,19 +33,16 @@ let _App = {
     // console.log("createShape", s);
     for (var j = 0; j < s.shapes.length; j++) {
       if(j==2){
-        let rad = 185;
+
+        let boxw=this.centerh*0.3;
         this.ctx.beginPath();
-        // this.ctx.arc(this.centerw, this.centerh, 205, 0, Math.PI * 2, true);
-        // this.ctx.rect(this.centerw-40, 0,80, 800)
-        this.ctx.rect(0, this.centerh-40,this.w, 80)
-        this.ctx.arc(this.centerw, this.centerh, 205, 0, Math.PI * 2);
-        // this.ctx.moveTo(this.centerw,0);
-        // this.ctx.fill();
+        this.ctx.rect(0, this.centerh-boxw/2,this.w, boxw)
+        this.ctx.arc(this.centerw, this.centerh, boxw*2.222, 0, Math.PI * 2);
         this.ctx.clip();
 
 
       }
-      var newGuy = new Shape(_App, s.shapes[j], s.scale);
+      var newGuy = new Shape(_App, s.shapes[j], s);
       // console.log(nm);
       for (var k = 0; k < 20; k++) {
         for (var i = 0; i < 3; i++) {

@@ -4,7 +4,8 @@
     {
     "bg":"rgb(56,55,59)",
     "blend":"color-dodge",
-    "scale":3312,
+    "randomness":3312,
+    "scale":0.5,
     "shapes":[
         {
           "name":"a",
@@ -116,7 +117,8 @@
   {
     "bg":"rgb(206,142,162)",
     "blend":"color-burn",
-    "scale":13,
+    "randomness":9919313,
+    "scale":0.65,
     "shapes":[
       {
         "name":"a",

@@ -78,7 +78,7 @@ exports.createNewPoint = function (p1, p2, scale) {
   var xx = (p1.x + p2.x) / 2;
   var yy = (p1.y + p2.y) / 2;
   var rnd = this.getRandom() + this.getRandom() + this.getRandom() + this.getRandom() + this.getRandom() + this.getRandom() - 3 / 3;
-  rnd *= Math.min(Math.pow(rnd, rnd), rnd * scale);
+  rnd *= Math.min(Math.pow(rnd, rnd), rnd * scale * 100);
   // console.log(iter, rnd);
   var ang = rnd * (2 * Math.PI);
 
@@ -134,7 +134,7 @@ var _shape = __webpack_require__(2);
 
 var _shape2 = _interopRequireDefault(_shape);
 
-var _shapeConfig = __webpack_require__(4);
+var _shapeConfig = __webpack_require__(3);
 
 var _shapeConfig2 = _interopRequireDefault(_shapeConfig);
 
@@ -144,6 +144,7 @@ var _App = {
   seed: 176,
   init: function init() {
     _utils2.default.initSeed(this.seed);
+
     // console.log(`Hello ${name}, how are you ${time}?`);
     // this.PRNG.initSeed(this.seed);
     this.canvas = document.getElementById('c');
@@ -156,25 +157,30 @@ var _App = {
     // this.ctx.imageSmoothingEnabled = true;
     this.ctx.beginPath();
     //
-    var newShape = _shapeConfig2.default.list[0];
+    var newShape = _shapeConfig2.default.list[1];
     // console.log(newShape);
     this.ctx.fillStyle = newShape.bg;
     this.ctx.fillRect(0, 0, this.w, this.h);
     //
     this.ctx.globalCompositeOperation = newShape.blend;
     //
-    console.log(newShape);
+    // console.log(newShape);
     this.createShape(newShape);
-
     // this.drawShape();
   },
   createShape: function createShape(s) {
     // console.log("createShape", s);
     for (var j = 0; j < s.shapes.length; j++) {
-      if (j == 0) {
-        // this.ctx.arc(this.centerw, this.centerh, 185, 0, Math.PI * 2, true);
-        // this.ctx.clip();
-
+      if (j == 2) {
+        var rad = 185;
+        this.ctx.beginPath();
+        // this.ctx.arc(this.centerw, this.centerh, 205, 0, Math.PI * 2, true);
+        // this.ctx.rect(this.centerw-40, 0,80, 800)
+        this.ctx.rect(0, this.centerh - 40, this.w, 80);
+        this.ctx.arc(this.centerw, this.centerh, 205, 0, Math.PI * 2);
+        // this.ctx.moveTo(this.centerw,0);
+        // this.ctx.fill();
+        this.ctx.clip();
       }
       var newGuy = new _shape2.default(_App, s.shapes[j], s.scale);
       // console.log(nm);
@@ -330,11 +336,10 @@ var Shape = function () {
 exports.default = Shape;
 
 /***/ }),
-/* 3 */,
-/* 4 */
+/* 3 */
 /***/ (function(module, exports) {
 
-module.exports = {"list":[{"bg":"rgb(56,55,59)","blend":"color-dodge","scale":12,"shapes":[{"name":"a","color":"rgba(0,155,222, 0.01)","type":{"ngon":false,"pointcount":6},"points":[{"x":520,"y":120},{"x":300,"y":300},{"x":600,"y":420},{"x":20,"y":50}]},{"name":"b","color":"rgba(113,211,130, 0.009)","type":{"ngon":false},"points":[{"x":220,"y":120},{"x":700,"y":400},{"x":600,"y":400},{"x":-10,"y":100}]},{"name":"c","color":"rgba(99,13,210, 0.03)","type":{"ngon":false},"points":[{"x":220,"y":120},{"x":700,"y":300},{"x":600,"y":400},{"x":-100,"y":50}]},{"name":"d","color":"rgba(110,55,110, 0.009)","type":{"ngon":false},"points":[{"x":220,"y":120},{"x":700,"y":300},{"x":600,"y":400},{"x":0,"y":100}]},{"name":"base1","color":"rgba(70,65,200, 0.003)","type":{"ngon":false},"points":[{"x":-220,"y":420},{"x":900,"y":450},{"x":800,"y":700},{"x":0,"y":700}]},{"name":"base2","color":"rgba(220,95,80, 0.002)","type":{"ngon":false},"points":[{"x":-620,"y":450},{"x":1900,"y":500},{"x":900,"y":1740},{"x":-1110,"y":1740}]},{"name":"base3","color":"rgba(240,255,5, 0.002)","type":{"ngon":false},"points":[{"x":-220,"y":400},{"x":900,"y":600},{"x":300,"y":850},{"x":-1110,"y":850}]},{"name":"base4","color":"rgba(250,5,130, 0.0034)","type":{"ngon":false},"points":[{"x":-620,"y":-50},{"x":800,"y":-100},{"x":900,"y":40},{"x":-110,"y":10}]}]}]}
+module.exports = {"list":[{"bg":"rgb(56,55,59)","blend":"color-dodge","scale":3312,"shapes":[{"name":"a","color":"rgba(0,155,222, 0.01)","type":{"ngon":false,"pointcount":6},"points":[{"x":5200,"y":1200},{"x":3000,"y":3000},{"x":6000,"y":4200},{"x":200,"y":500}]},{"name":"b","color":"rgba(113,211,130, 0.009)","type":{"ngon":false},"points":[{"x":2200,"y":1200},{"x":7000,"y":4000},{"x":6000,"y":4000},{"x":-100,"y":1000}]},{"name":"c","color":"rgba(99,13,210, 0.03)","type":{"ngon":false},"points":[{"x":2200,"y":1200},{"x":7000,"y":3000},{"x":6000,"y":4000},{"x":-1000,"y":500}]},{"name":"d","color":"rgba(110,55,110, 0.009)","type":{"ngon":false},"points":[{"x":2200,"y":1200},{"x":7000,"y":3000},{"x":6000,"y":4000},{"x":0,"y":1000}]},{"name":"base1","color":"rgba(70,65,200, 0.003)","type":{"ngon":false},"points":[{"x":-2200,"y":4200},{"x":9000,"y":4500},{"x":8000,"y":7000},{"x":0,"y":7000}]},{"name":"base2","color":"rgba(220,95,80, 0.002)","type":{"ngon":false},"points":[{"x":-6200,"y":4500},{"x":19000,"y":5000},{"x":9000,"y":17400},{"x":-11100,"y":17400}]},{"name":"base3","color":"rgba(240,255,5, 0.002)","type":{"ngon":false},"points":[{"x":-2200,"y":4000},{"x":9000,"y":6000},{"x":3000,"y":8500},{"x":-11100,"y":8500}]},{"name":"base4","color":"rgba(250,5,130, 0.0034)","type":{"ngon":false},"points":[{"x":-6200,"y":-500},{"x":8000,"y":-1000},{"x":9000,"y":400},{"x":-1100,"y":100}]}]},{"bg":"rgb(206,142,162)","blend":"color-burn","scale":13,"shapes":[{"name":"a","color":"rgba(215,155,0, 0.01)","type":{"ngon":true,"pointcount":9}},{"name":"b","color":"rgba(255,0,230, 0.0123)","type":{"ngon":true,"pointcount":9}},{"name":"c","color":"rgba(33,28,52, 0.008)","type":{"ngon":true,"pointcount":9}},{"name":"d","color":"rgba(199,243,225, 0.006)","type":{"ngon":false},"points":[{"x":-6200,"y":-500},{"x":8000,"y":-1000},{"x":9000,"y":4400},{"x":-1100,"y":4100}]},{"name":"e","color":"rgba(238,69,164, 0.006)","type":{"ngon":true,"pointcount":9}}]}]}
 
 /***/ })
 /******/ ]);

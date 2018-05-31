@@ -18,13 +18,14 @@ function createBaseShape(s) {
 }
 // new
 class Shape {
-  constructor(app, obj, scl) {
+  constructor(app, obj, s) {
     // console.log(obj);
     this.subdivisions = 0;
     this.totalPoints = 0;
     this.app = app;
     this.color = obj.color;
-    this.scale = scl;
+    this.scale = s.scale;
+    this.randomness = s.randomness;
     this.shapes = { shapeArr_0: [] };
     this.createStartingPoints(obj);
     createBaseShape(this);
@@ -34,7 +35,7 @@ class Shape {
     if(obj.type.ngon==true){
       let num_pts = obj.type.pointcount;
       let ang = 0;
-      let rad = this.app.w*0.15;
+      let rad = this.app.w*this.scale;
       let step = (2*Math.PI)/num_pts;
       for (var i = 0; i < num_pts; i++) {
         var _x = this.app.centerw+Math.cos(ang)*rad*utils.getRandom();
@@ -60,14 +61,14 @@ class Shape {
         newArr.push(tmparr[i]);
       }else{
         //*|* main loop
-        var newPt = utils.createNewPoint(tmparr[i], tmparr[i-1], this.scale);
+        var newPt = utils.createNewPoint(tmparr[i], tmparr[i-1], this.randomness);
         //push new point, then push older existing point
         newArr.push(newPt);
         newArr.push(arr[i]);
       }
     }
     //*|* last one! Wrap back to connect to the first point at the end of the loop
-    var newPt = utils.createNewPoint(arr[arr.length-1], arr[0], this.scale);
+    var newPt = utils.createNewPoint(arr[arr.length-1], arr[0], this.randomness);
     newArr.push(newPt);
 
     return newArr;
